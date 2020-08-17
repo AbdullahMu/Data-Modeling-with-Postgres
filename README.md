@@ -3,6 +3,7 @@
 
 ---
 
+<h1 id="project-data-modeling-with-postgres">Project: Data Modeling with Postgres</h1>
 <h2 id="introduction">Introduction</h2>
 <p>A startup called Sparkify want to analyze the data they have been collecting on songs and user activity on their new music streaming app. The analytics team is particularly interested in understanding what songs users are listening to.</p>
 <p>The aim is to create a Postgres Database Schema and ETL pipeline to optimize queries for song play analysis.</p>
@@ -25,7 +26,7 @@ log_data/2018/11/2018-11-13-events.json
 </code></pre>
 <h2 id="project-description">Project Description</h2>
 <p>In this project, I have to model data with Postgres and build and ETL pipeline using Python. On the database side, I have to define fact and dimension tables for a Star Schema for a specific focus. On the other hand, ETL pipeline would transfer data from files located in two local directories into these tables in Postgres using Python and SQL</p>
-<h1 id="schema-for-song-play-analysis">Schema for Song Play Analysis</h1>
+<h2 id="schema-for-song-play-analysis">Schema for Song Play Analysis</h2>
 <p>Using the song and log datasets, you’ll need to create a star schema optimized for queries on song play analysis. This includes the following tables.</p>
 <h4 id="fact-table">Fact Table</h4>
 <ol>
@@ -58,7 +59,7 @@ log_data/2018/11/2018-11-13-events.json
 </ul>
 </li>
 </ol>
-<h1 id="project-template">Project Template</h1>
+<h2 id="project-template">Project Template</h2>
 <p>To get started with the project, go to the workspace on the next page, where you’ll find the project template files. You can work on your project and submit your work through this workspace. Alternatively, you can download the project template files from the Resources folder if you’d like to develop your project locally.</p>
 <p>In addition to the data files, the project workspace includes six files:</p>
 <ol>
