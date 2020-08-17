@@ -1,7 +1,3 @@
----
-
-
----
 
 <h1 id="project-data-modeling-with-postgres">Project: Data Modeling with Postgres</h1>
 <h2 id="introduction">Introduction</h2>
