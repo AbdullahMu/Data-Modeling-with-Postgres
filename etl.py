@@ -10,8 +10,10 @@ def process_song_file(cur, filepath):
     """
         This function reads JSON files and read information of song and artist data and saves into song_data and artist_data
         Arguments:
-        cur: Database Cursor
-        filepath: location of JSON files
+        @type cur: Cursor object
+        @param cur: Cursor connected to PostgreSQL
+        @type filepath: String
+        @param filepath: location of JSON files
         Return: None
     """
     # open song file
@@ -30,8 +32,10 @@ def process_log_file(cur, filepath):
     """
         This function reads Log files and reads information of time, user and songplay data and saves into time, user, songplay
         Arguments:
-        cur: Database Cursor
-        filepath: location of Log files
+        @type cur: Cursor object
+        @param cur: Cursor connected to PostgreSQL
+        @type filepath: String
+        @param filepath: location of Log files
         Return: None
     """
 
@@ -88,7 +92,7 @@ def process_data(cur, conn, filepath, func):
     @param conn: Holding the session to the PostgreSQL database
     @type filepath: String
     @param filepath: Path containing subfolders with data that will be crawled in this function
-     @type func: Function
+    @type func: Function
     @param func: Function for processing the data inside the given filepath
     """
     
