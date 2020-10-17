@@ -13,54 +13,54 @@ CREATE TABLE IF NOT EXISTS songplays (
     songplay_id SERIAL PRIMARY KEY,
     start_time TIMESTAMP NOT NULL,
     user_id INTEGER NOT NULL,
-    level VARCHAR(10),
-    song_id VARCHAR(20),
-    artist_id VARCHAR(20),
+    level VARCHAR,
+    song_id VARCHAR NOT NULL,
+    artist_id VARCHAR NOT NULL,
     session_id INTEGER,
-    location VARCHAR(50),
-    user_agent VARCHAR(150)
+    location VARCHAR,
+    user_agent VARCHAR
 );
 """)
 
 user_table_create = ("""
 CREATE TABLE IF NOT EXISTS users (
     user_id INTEGER PRIMARY KEY,
-    first_name VARCHAR(50),
-    last_name VARCHAR(50),
+    first_name VARCHAR NOT NULL,
+    last_name VARCHAR NOT NULL,
     gender CHAR(1),
-    level VARCHAR(10)
+    level VARCHAR NOT NULL
 );
 """)
 
 song_table_create = ("""
 CREATE TABLE IF NOT EXISTS songs (
-    song_id VARCHAR(20) PRIMARY KEY,
-    title VARCHAR(100),
-    artist_id VARCHAR(20) NOT NULL,
+    song_id VARCHAR PRIMARY KEY,
+    title VARCHAR NOT NULL,
+    artist_id VARCHAR NOT NULL,
     year INTEGER,
-    duration FLOAT(5)
+    duration FLOAT
 );
 """)
 
 artist_table_create = ("""
 CREATE TABLE IF NOT EXISTS artists (
-    artist_id VARCHAR(20) PRIMARY KEY,
-    name VARCHAR(100),
-    location VARCHAR(100),
-    lattitude FLOAT(5),
-    longitude FLOAT(5)
+    artist_id VARCHAR PRIMARY KEY,
+    name VARCHAR NOT NULL,
+    location VARCHAR,
+    lattitude FLOAT,
+    longitude FLOAT
 );
 """)
 
 time_table_create = ("""
 CREATE TABLE IF NOT EXISTS time (
     start_time TIMESTAMP PRIMARY KEY,
-    hour INTEGER,
-    day INTEGER,
-    week INTEGER,
-    month INTEGER,
-    year INTEGER,
-    weekday INTEGER
+    hour INTEGER NOT NULL,
+    day INTEGER NOT NULL,
+    week INTEGER NOT NULL,
+    month INTEGER NOT NULL,
+    year INTEGER NOT NULL,
+    weekday INTEGER NOT NULL
 );
 """)
 
@@ -74,32 +74,36 @@ ON CONFLICT(songplay_id) DO NOTHING;
 
 user_table_insert = ("""
 INSERT INTO users (user_id, first_name, last_name, gender, level)
-VALUES (%s, %s, %s, %s, %s) ON CONFLICT (user_id) DO UPDATE SET level = EXCLUDED.level;
+VALUES (%s, %s, %s, %s, %s) 
+ON CONFLICT (user_id) DO UPDATE SET level = EXCLUDED.level;
 """)
 
 song_table_insert = ("""
 INSERT INTO songs (song_id, title, artist_id, year, duration)
-VALUES (%s, %s, %s, %s, %s) ON CONFLICT DO NOTHING;
+VALUES (%s, %s, %s, %s, %s) 
+ON CONFLICT DO NOTHING;
 """)
 
 artist_table_insert = ("""
 INSERT INTO artists (artist_id, name, location, lattitude, longitude)
-VALUES (%s, %s, %s, %s, %s) ON CONFLICT DO NOTHING;
+VALUES (%s, %s, %s, %s, %s) 
+ON CONFLICT DO NOTHING;
 """)
 
 
 time_table_insert = ("""
 INSERT INTO time (start_time, hour, day, week, month, year, weekday)
-VALUES (%s, %s, %s, %s, %s, %s, %s) ON CONFLICT DO NOTHING;
+VALUES (%s, %s, %s, %s, %s, %s, %s) 
+ON CONFLICT DO NOTHING;
 """)
 
 # FIND SONGS
 
 song_select = ("""
-SELECT ss.song_id, ss.artist_id FROM songs ss 
-JOIN artists ars on ss.artist_id = ars.artist_id
+SELECT ss.song_id, ss.artist_id FROM songs AS ss 
+INNER JOIN artists AS aa ON ss.artist_id = aa.artist_id
 WHERE ss.title = %s
-AND ars.name = %s
+AND aa.name = %s
 AND ss.duration = %s
 ;
 """)
